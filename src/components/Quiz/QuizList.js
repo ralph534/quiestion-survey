@@ -9,6 +9,7 @@ class QuizList extends Component{
        <div className="questions">
             {
               this.props.questions.map(question => {
+                if(question.id == this.props.current) /// If statement thats allow only one question to show up which is the current question
                 return <Question
                 question = {question}
                 />
