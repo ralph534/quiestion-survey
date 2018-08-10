@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Question from './components/Quiz/Question.js'
 import QuizList from './components/Quiz/QuizList.js'
+import ScoreBox from './components/Quiz/ScoreBox.js'
+import Results from './components/Quiz/Results.js'
+
 
 class App extends Component {
    constructor(props){
@@ -94,10 +96,37 @@ class App extends Component {
      }
    }
 
+
+
+
+   setCurrent(current){
+     this.setState({current})
+   }
+
+   setScore(score){
+     this.setState({score})
+   }
+
   render() {
+    if(this.state.current > this.state.questions.length){
+      var scorebox = "";
+      var results = <Results {...this.state}/>
+    }else{
+      var scorebox = <ScoreBox {...this.state}/>
+      var results = "";
+    }
+
+
     return (
       <div className="App">
-           <QuizList {...this.state} />
+        {scorebox}
+
+           <QuizList {...this.state}
+             setCurrent={this.setCurrent.bind(this)}
+             setScore={this.setScore.bind(this)}
+              />
+            {results}
+
       </div>
     );
   }
